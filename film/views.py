@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .serializers import *
@@ -62,7 +63,10 @@ class AktyorAPI(APIView):
             return Response(serializer.data)
         return Response(serializer.errors)
 
-
+    def delete(self, request, son):
+        aktyor = Aktyor.objects.get(id=son)
+        aktyor.delete()
+        return Response({"success": "True"}, status=status.HTTP_200_OK)
 
 
 class MenApi(APIView):

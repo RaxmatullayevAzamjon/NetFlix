@@ -77,3 +77,16 @@ class MenApi(APIView):
         }
         return Response(d)
 
+
+class KinolarAPI(APIView):
+    def get(self, request):
+        kinolar = Kino.objects.all()
+        serializer = KinoSerializer(kinolar, many=True)
+        return Response(serializer.data)
+
+class KinoAPI(APIView):
+    def get(self, request, son):
+        kino = Kino.objects.get(id=son)
+        serializer = KinoSerializer(kino)
+        return Response(serializer.data)
+

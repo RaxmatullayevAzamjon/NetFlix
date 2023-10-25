@@ -8,4 +8,7 @@ urlpatterns = [
     path('men_haqimda/', MenApi.as_view()),
     path('aktyorlar/', AkrtorlarApi.as_view()),
     path('aktyor/<int:son>/', AktyorAPI.as_view()),
+    path('kinolar/', KinolarAPI.as_view()),
+    path('kinolar/<int:son>/', KinoAPI.as_view()),
+
 ]

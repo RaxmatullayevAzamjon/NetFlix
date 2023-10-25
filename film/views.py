@@ -84,9 +84,30 @@ class KinolarAPI(APIView):
         serializer = KinoSerializer(kinolar, many=True)
         return Response(serializer.data)
 
+
+    def post(self, request):
+        kino = request.data
+        serializer = KinoSerializer(data=kino)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors)
+
+
 class KinoAPI(APIView):
     def get(self, request, son):
         kino = Kino.objects.get(id=son)
         serializer = KinoSerializer(kino)
         return Response(serializer.data)
+
+
+    def put(self, request, son):
+        kino = Kino.objects.get(id=son)
+        yangi = request.data
+        serializer = KinoSerializer(kino,data=yangi)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors)
+
 
